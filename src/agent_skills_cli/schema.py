@@ -111,7 +111,7 @@ class AgentConfig:
 @dataclass(frozen=True)
 class SkillConfig:
     name: str
-    path: str
+    location: str = field(default=".")
     agents: list[str] = field(default_factory=list)
 
     @classmethod
@@ -119,20 +119,20 @@ class SkillConfig:
         if not isinstance(data, dict):
             raise ConfigError("Skill config must be a mapping")
         name = _require_str(data, "name")
-        path = _require_str(data, "path")
+        location = _optional_str(data, "location") or "."
         agents = _optional_list(data, "agents", [])
         if not all(isinstance(a, str) and a.strip() for a in agents):
             raise ConfigError("Skill agents must be non-empty strings")
-        return cls(name=name, path=path, agents=agents)
+        return cls(name=name, location=location, agents=agents)
 
     def validate(self) -> None:
-        _validate_relpath(self.path, "skills[].path")
+        _validate_relpath(self.location, "skills[].location")
         _validate_unique(self.agents, f"agent in skill '{self.name}'")
 
     def to_dict(self) -> dict:
         data: dict[str, object] = {
             "name": self.name,
-            "path": self.path,
+            "location": self.location,
         }
         if self.agents:
             data["agents"] = list(self.agents)

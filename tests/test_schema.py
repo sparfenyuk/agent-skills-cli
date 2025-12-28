@@ -38,12 +38,12 @@ def test_duplicate_skill_names_across_repos():
             {
                 "repo": "https://example.com/repo1",
                 "rev": "v1",
-                "skills": [{"name": "skill-a", "path": "skills/a"}],
+                "skills": [{"name": "skill-a", "location": "skills/a"}],
             },
             {
                 "repo": "https://example.com/repo2",
                 "rev": "v1",
-                "skills": [{"name": "skill-a", "path": "skills/a"}],
+                "skills": [{"name": "skill-a", "location": "skills/a"}],
             },
         ],
     }
@@ -58,7 +58,7 @@ def test_skill_path_cannot_escape():
             {
                 "repo": "https://example.com/repo",
                 "rev": "v1",
-                "skills": [{"name": "skill-a", "path": "../bad"}],
+                "skills": [{"name": "skill-a", "location": "../bad"}],
             }
         ],
     }
@@ -91,7 +91,7 @@ def test_duplicate_skill_agents():
                 "skills": [
                     {
                         "name": "skill-a",
-                        "path": "skill-a",
+                        "location": "skill-a",
                         "agents": ["codex", "codex"],
                     }
                 ],

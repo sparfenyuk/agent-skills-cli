@@ -49,10 +49,10 @@ repos:
     resolved_sha: 7d2e9a1c8c9d4d3c1a3b2d9f6b2e1a0c0f1d2e3a
     skills:
       - name: architecture-feature-mapping-doc
-        path: architecture-feature-mapping-doc
+        location: architecture-feature-mapping-doc
         agents: [codex]
       - name: skill-installer
-        path: .system/skill-installer
+        location: .system/skill-installer
         agents: [codex, claude]
 ```
 
@@ -64,7 +64,7 @@ Notes:
 ## CLI commands (minimal)
 ```
 agent-skills init
-agent-skills install <repo> --rev v1.2.3 [--skill name] [--path path]
+agent-skills-cli install <repo> --rev v1.2.3 [--skill name] [--remote-location location]
 agent-skills enable <skill> --agent codex
 agent-skills sync
 agent-skills update [--repo ...] [--skill ...]
@@ -79,7 +79,7 @@ agent-skills list
 
 ### install
 - Add repo entry to config (with `rev`).
-- Optionally add skill entry with `path` and `name`.
+- Add skill entry with `location` and `name`.
 - Does not clone until `sync` unless `--sync` is provided.
 
 ### enable
@@ -91,7 +91,7 @@ agent-skills list
   - Clone or fetch into `.agent-skills/store/<repo_id>/`.
   - Resolve `rev` to a commit SHA and write `resolved_sha` to config.
   - Check out to `.agent-skills/store/<repo_id>/<resolved_sha>/`.
-  - Validate each `skills[].path` contains `SKILL.md`.
+  - Validate each `skills[].location` contains `SKILL.md`.
 - For each agent:
   - Create symlinks in `.agent-skills/agents/<agent>/<skill_name>`.
   - If `agents[].target_dir` is set, also link there.
@@ -102,9 +102,9 @@ agent-skills list
 - Run `sync` to refresh store and symlinks.
 
 ## Validation rules
-- A skill path must exist and contain `SKILL.md`.
+- A skill location must exist and contain `SKILL.md`.
 - Symlink name defaults to `skills[].name`; collisions are errors unless `--force`.
-- Only paths inside the repo are allowed.
+- Only locations inside the repo are allowed.
 
 ## Python module layout (proposed)
 ```

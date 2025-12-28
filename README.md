@@ -38,11 +38,11 @@ Install a repo and add a skill:
 
 ```bash
 agent-skills-cli install https://github.com/acme/agent-skills --rev v1.3.0 \
-  --skill architecture-feature-mapping-doc --path architecture-feature-mapping-doc \
+  --skill architecture-feature-mapping-doc --remote-location architecture-feature-mapping-doc \
   --agent codex
 ```
 
-Sync to fetch and link:
+Sync to fetch new version and create symlinks:
 
 ```bash
 agent-skills-cli sync
@@ -62,20 +62,20 @@ agents:
     target_dir: .claude/skills
   opencode:
     target_dir: .opencode/skills
-
 repos:
-  - repo: https://github.com/acme/agent-skills
-    rev: v1.3.0
-    resolved_sha: 7d2e9a1c8c9d4d3c1a3b2d9f6b2e1a0c0f1d2e3a
-    skills:
-      - name: architecture-feature-mapping-doc
-        path: architecture-feature-mapping-doc
-        agents: [codex]
+- repo: https://github.com/anthropics/claude-code/
+  rev: v2.0.74
+  resolved_sha: d213a74fc8e3b6efded52729196e0c2d4c3abb3e
+  skills:
+  - name: frontend-design
+    location: plugins/frontend-design/skills/frontend-design
+    agents:
+    - claude
 ```
 
 ## Commands
 - `agent-skills-cli init` - Create a default `.agent-skills.yaml`.
-- `agent-skills-cli install` - Add a repo and optionally a skill entry.
+- `agent-skills-cli install` - Add a repo and skill entry.
 - `agent-skills-cli enable` - Enable a skill for one or more agents.
 - `agent-skills-cli sync` - Fetch repos, resolve SHAs, and create symlinks.
 - `agent-skills-cli update` - Re-resolve SHAs and re-sync.

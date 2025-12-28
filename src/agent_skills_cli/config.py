@@ -31,12 +31,17 @@ def init_config(path: PathLike, *, overwrite: bool = False) -> RootConfig:
 
 
 def load_config(path: PathLike) -> RootConfig:
+    raw = load_config_data(path)
+    return RootConfig.from_dict(raw)
+
+
+def load_config_data(path: PathLike) -> dict:
     raw = _load_yaml(Path(path))
     if raw is None:
         raw = {}
     if not isinstance(raw, dict):
         raise ConfigError("Config must be a YAML mapping at the top level")
-    return RootConfig.from_dict(raw)
+    return raw
 
 
 def save_config(path: PathLike, config: RootConfig) -> None:

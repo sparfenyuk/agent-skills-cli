@@ -1,6 +1,6 @@
 [project]
 name = "agent-skills-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "A lightweight CLI to install, pin, and enable agent skills across projects with a single local store and per‑agent symlinks."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -34,6 +34,10 @@ per-file-ignores = { "tests/*" = [
     "B008",
     "FBT001",
     "FBT003",
+    "PLR0912",
     "PLR0913",
+    "PLR0915",
+    "C901",
+], "*/sync.py" = [
     "C901",
 ] }
