@@ -1,0 +1,30 @@
+[project]
+name = "agent-skills-cli"
+version = "0.1.0"
+description = "A lightweight CLI to install, pin, and enable agent skills across projects with a single local store and per‑agent symlinks."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pyyaml>=6.0.3",
+    "typer>=0.21.0",
+]
+
+[project.scripts]
+agent-skills-cli = "agent_skills.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9.18,<0.10.0"]
+build-backend = "uv_build"
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "types-pyyaml>=6.0.12.20250915",
+]
+
+[tool.uv]
+package = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["COM812", "D", "TRY003", "EM", "TC"]
+per-file-ignores = { "tests/*" = ["ANN", "S101", "INP001"], "*/cli.py" = ["B008", "FBT001", "FBT003", "PLR0913", "C901"] }
