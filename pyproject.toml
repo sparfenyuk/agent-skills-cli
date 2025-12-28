@@ -3,7 +3,7 @@ name = "agent-skills-cli"
 version = "0.1.0"
 description = "A lightweight CLI to install, pin, and enable agent skills across projects with a single local store and per‑agent symlinks."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "pyyaml>=6.0.3",
     "typer>=0.21.0",
@@ -17,6 +17,8 @@ requires = ["uv_build>=0.9.18,<0.10.0"]
 build-backend = "uv_build"
 [dependency-groups]
 dev = [
+    "coverage>=7.13.0",
+    "mypy>=1.19.1",
     "pytest>=9.0.2",
     "types-pyyaml>=6.0.12.20250915",
 ]
